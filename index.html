@@ -579,6 +579,136 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
         }
         
+        /* Order Online Section */
+        .order-section {
+            padding: 10rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .order-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 95, 157, 0.3) 0%, rgba(224, 122, 95, 0.3) 100%);
+            opacity: 0.5;
+        }
+        
+        .order-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .order-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+        
+        .order-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+        }
+        
+        .order-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .order-card:hover::before {
+            left: 100%;
+        }
+        
+        .order-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            border-color: var(--secondary);
+        }
+        
+        .order-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+        
+        .order-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--light);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .order-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .order-btn-arrow {
+            font-size: 2rem;
+            color: var(--secondary);
+            transition: transform 0.3s ease;
+        }
+        
+        .order-card:hover .order-btn-arrow {
+            transform: translateX(10px);
+            color: var(--light);
+        }
+        
+        .order-footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 2rem;
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .order-footer p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+        
+        .phone-link {
+            color: var(--secondary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+        }
+        
+        .phone-link:hover {
+            color: var(--light);
+            text-shadow: 0 0 20px rgba(200, 168, 130, 0.8);
+        }
+        
         /* CTA Section */
         .cta-section {
             padding: 8rem 2rem;
@@ -704,6 +834,7 @@
             .featured-grid { grid-template-columns: repeat(2, 1fr); }
             .experience-content { grid-template-columns: 1fr; gap: 3rem; }
             .footer-content { grid-template-columns: repeat(2, 1fr); }
+            .order-grid { grid-template-columns: repeat(2, 1fr); }
         }
         
         @media (max-width: 768px) {
@@ -716,6 +847,7 @@
             .cta-content { padding: 3rem 2rem; }
             .cta-content h2 { font-size: 2.5rem; }
             .footer-content { grid-template-columns: 1fr; }
+            .order-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -731,10 +863,11 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="story.html">Our Story</a></li>
                 <li><a href="menu.html">Menu</a></li>
+                <li><a href="#order">Order</a></li>
                 <li><a href="#location">Location</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <a href="tel:8456342029" class="nav-cta-btn">Reserve Now</a>
+            <a href="#order" class="nav-cta-btn">Order Online</a>
         </div>
     </nav>
 
@@ -751,7 +884,7 @@
             </p>
             <div class="hero-cta">
                 <a href="menu.html" class="btn btn-primary">Explore Menu</a>
-                <a href="tel:8456342029" class="btn btn-secondary">Call to Order</a>
+                <a href="#order" class="btn btn-secondary">Order Online</a>
             </div>
         </div>
         <div class="scroll-indicator">Scroll to explore</div>
@@ -825,6 +958,51 @@
         </div>
     </section>
 
+    <!-- Order Online Section -->
+    <section class="order-section" id="order">
+        <div class="order-bg"></div>
+        <div class="order-container">
+            <div class="section-title">
+                <h2>Order Online</h2>
+                <p>Choose Your Preferred Platform</p>
+            </div>
+            
+            <div class="order-grid">
+                <a href="https://www.grubhub.com/restaurant/opa-breakfast--sandwich-shop-29-third-street-new-city/2612260?utm_source=google&utm_medium=organic&utm_campaign=place-action-link&delivery=true&rwg_token=ACgRB3fW9AF-Mky9vFJd6MCmmRfLDrEVFHy2MsZcLmBDVKVd9ppvthffPxTYzo6Gwf7pWW1kKxfWD447r_06xgHupaEv27uG_w%3D%3D" target="_blank" class="order-card">
+                    <div class="order-icon">🍔</div>
+                    <h3>Grubhub</h3>
+                    <p>Delivery & Pickup</p>
+                    <div class="order-btn-arrow">→</div>
+                </a>
+                
+                <a href="https://www.seamless.com/menu/opa-breakfast--sandwich-shop-29-third-street-new-city/2612260?utm_source=google&utm_medium=organic&utm_campaign=place-action-link&delivery=true&rwg_token=ACgRB3es-6nVXhs56XxDxRmzX7vN0h4wgNWyeI4Xshf1oZPxqVn9e9oSocU8dr8Tg18xSPx25WLcD_lJm9isz1h0F7rGO6-g-w%3D%3D" target="_blank" class="order-card">
+                    <div class="order-icon">🚚</div>
+                    <h3>Seamless</h3>
+                    <p>Fast Delivery</p>
+                    <div class="order-btn-arrow">→</div>
+                </a>
+                
+                <a href="https://www.trycaviar.com/store/opa-breakfast-&-sandwich-shop-new-city-1721183/2177713/?rwg_token=ACgRB3eKxsflVB7jrTYWxCzNKpPBnygb-RgoOIeXooizfZanrl5OJ_bQA5ZJnstO2MOhnmgIzapwJYuVBtMn122-ZH_ttPGP6w==&utm_campaign=gpa" target="_blank" class="order-card">
+                    <div class="order-icon">🍽️</div>
+                    <h3>Caviar</h3>
+                    <p>Premium Delivery</p>
+                    <div class="order-btn-arrow">→</div>
+                </a>
+                
+                <a href="https://order.online/store/-1721183/?hideModal=true&utm_source=gfo&rwg_token=ACgRB3cVGLOxLbL0200EpgIbDPncL5-H37kzYhySJaHsFZ1WfUIgMC4PKpDV-29UQpCJ81ubUR0NpOx85D0-dRLCPFWxpj-Zqg%3D%3D&pickup=true" target="_blank" class="order-card">
+                    <div class="order-icon">📦</div>
+                    <h3>Direct Order</h3>
+                    <p>Pickup Available</p>
+                    <div class="order-btn-arrow">→</div>
+                </a>
+            </div>
+            
+            <div class="order-footer">
+                <p>Or call us directly: <a href="tel:8456342029" class="phone-link">(845) 634-2029</a></p>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="cta-content">
@@ -832,7 +1010,7 @@
             <p>Reserve your table today and discover why OPA is New City's premier destination for authentic Greek cuisine.</p>
             <div class="cta-buttons">
                 <a href="menu.html" class="btn btn-primary">View Full Menu</a>
-                <a href="tel:8456342029" class="btn btn-secondary">Call Us Now</a>
+                <a href="#order" class="btn btn-secondary">Order Online Now</a>
             </div>
         </div>
     </section>
