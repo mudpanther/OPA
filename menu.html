@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - OPA Restaurant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2C5F9D;
+            --secondary: #C8A882;
+            --accent: #E07A5F;
+            --dark: #1a1a2e;
+            --light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light);
+            letter-spacing: 4px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+            text-shadow: 0 0 20px rgba(200, 168, 130, 0.6);
+        }
+        
+        .nav-cta-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50px;
+            color: var(--light);
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+        
+        .nav-cta-btn:hover {
+            background: rgba(200, 168, 130, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* Menu Hero */
+        .menu-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 95, 157, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+        }
+        
+        .menu-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: var(--light);
+            padding: 2rem;
+        }
+        
+        .menu-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .menu-hero p {
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* Category Filter */
+        .category-filter {
+            position: sticky;
+            top: 85px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 1.5rem 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--light);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-color: transparent;
+            box-shadow: 0 5px 20px rgba(200, 168, 130, 0.4);
+        }
+        
+        /* Menu Section */
+        .menu-section {
+            padding: 4rem 2rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .menu-category {
+            margin-bottom: 6rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .category-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-header p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .menu-item:hover::before {
+            left: 100%;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .item-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--light);
+            font-weight: 500;
+            flex: 1;
+        }
+        
+        .item-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--secondary);
+            font-weight: 600;
+            margin-left: 1rem;
+        }
+        
+        .item-description {
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+        
+        .featured-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 20px;
+            color: var(--light);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+        }
+        
+        /* Location Section with Map */
+        .location-section {
+            padding: 8rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .location-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .location-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .location-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .location-header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
+        }
+        
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .location-info {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            padding: 3rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .info-block {
+            margin-bottom: 3rem;
+        }
+        
+        .info-block:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-block h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .info-block p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.8;
+        }
+        
+        .hours-table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .hours-table td {
+            padding: 0.8rem 0;
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .hours-table td:first-child {
+            font-weight: 600;
+            color: var(--light);
+        }
+        
+        .hours-table td:last-child {
+            text-align: right;
+        }
+        
+        .map-container {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            overflow: hidden;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            border: none;
+        }
+        
+        /* CTA Section */
+        .menu-cta {
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+        
+        .menu-cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            padding: 5rem 4rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .menu-cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 2rem;
+        }
+        
+        .menu-cta p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--light);
+        }
+        
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border: 2px solid transparent;
+            color: var(--light);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(200, 168, 130, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem 2rem;
+            color: var(--light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px) rotate(360deg);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            .location-content { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-hero h1 { font-size: 3.5rem; }
+            .category-header h2 { font-size: 2.5rem; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">OPA</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="tel:8456342029" class="nav-cta-btn">Reserve Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="menu-hero">
+        <div class="menu-hero-bg"></div>
+        <div class="menu-hero-content">
+            <h1>Our Menu</h1>
+            <p>Authentic Greek Delicacies</p>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+        <div class="filter-container">
+            <button class="filter-btn active" data-category="all">All Dishes</button>
+            <button class="filter-btn" data-category="appetizers">Appetizers</button>
+            <button class="filter-btn" data-category="salads">Salads</button>
+            <button class="filter-btn" data-category="gyros">Gyros</button>
+            <button class="filter-btn" data-category="platters">Platters</button>
+            <button class="filter-btn" data-category="specials">House Specials</button>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <!-- Appetizers -->
+        <div class="menu-category" data-category="appetizers">
+            <div class="category-header">
+                <h2>Appetizers</h2>
+                <p>Begin Your Journey</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Dolmadakia</h3>
+                        <span class="item-price">$12.95</span>
+                    </div>
+                    <p class="item-description">Traditional grape leaves stuffed with seasoned rice and herbs, served with creamy lemon sauce</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Greek Quesadilla</h3>
+                        <span class="item-price">$12.95</span>
+                    </div>
+                    <p class="item-description">A Mediterranean twist on a classic—feta, spinach, and herbs in a crispy tortilla</p>
+                    <span class="featured-tag">Popular</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Hummus</h3>
+                        <span class="item-price">$10.95</span>
+                    </div>
+                    <p class="item-description">Silky smooth chickpea spread with tahini, garlic, and olive oil, served with warm pita</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Tzatziki</h3>
+                        <span class="item-price">$10.95</span>
+                    </div>
+                    <p class="item-description">Cool, refreshing yogurt dip with cucumber, garlic, and fresh dill</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Feta Cheese Plate</h3>
+                        <span class="item-price">$10.95</span>
+                    </div>
+                    <p class="item-description">Premium Greek feta drizzled with olive oil, oregano, and olives</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Falafel</h3>
+                        <span class="item-price">$9.95</span>
+                    </div>
+                    <p class="item-description">Crispy chickpea fritters with herbs and spices, served with tahini sauce</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Salads -->
+        <div class="menu-category" data-category="salads">
+            <div class="category-header">
+                <h2>Fresh Salads</h2>
+                <p>Garden to Table</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Greek Salad</h3>
+                        <span class="item-price">$15.95</span>
+                    </div>
+                    <p class="item-description">Tomatoes, cucumbers, red onions, Kalamata olives, feta cheese, and house vinaigrette</p>
+                    <span class="featured-tag">Signature</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Greek Autumn Salad</h3>
+                        <span class="item-price">$19.95</span>
+                    </div>
+                    <p class="item-description">Mixed greens, roasted vegetables, goat cheese, candied walnuts, and balsamic glaze</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Classic Caesar</h3>
+                        <span class="item-price">$15.95</span>
+                    </div>
+                    <p class="item-description">Crisp romaine, parmesan, croutons, and our house-made Caesar dressing</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Beets Salad</h3>
+                        <span class="item-price">$17.95</span>
+                    </div>
+                    <p class="item-description">Roasted beets, arugula, goat cheese, walnuts, and citrus vinaigrette</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Chef Salad</h3>
+                        <span class="item-price">$16.95</span>
+                    </div>
+                    <p class="item-description">Mixed greens, turkey, ham, cheese, hard-boiled egg, and vegetables</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gyros -->
+        <div class="menu-category" data-category="gyros">
+            <div class="category-header">
+                <h2>Gyros</h2>
+                <p>Wrapped Perfection</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Traditional Gyro</h3>
+                        <span class="item-price">$13.95</span>
+                    </div>
+                    <p class="item-description">Slow-roasted meat carved fresh, wrapped in warm pita with tomatoes, onions, and tzatziki</p>
+                    <span class="featured-tag">Best Seller</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Chicken Gyro</h3>
+                        <span class="item-price">$13.75</span>
+                    </div>
+                    <p class="item-description">Marinated grilled chicken with fresh vegetables and signature sauce in pita</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Grilled Shrimp Gyro</h3>
+                        <span class="item-price">$14.95</span>
+                    </div>
+                    <p class="item-description">Succulent grilled shrimp with Mediterranean vegetables and garlic sauce</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Falafel Gyro</h3>
+                        <span class="item-price">$13.75</span>
+                    </div>
+                    <p class="item-description">Crispy falafel with hummus, fresh vegetables, and tahini sauce</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Grilled Vegetable Gyro</h3>
+                        <span class="item-price">$13.75</span>
+                    </div>
+                    <p class="item-description">Seasonal grilled vegetables with feta cheese and balsamic glaze</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Traditional Platters -->
+        <div class="menu-category" data-category="platters">
+            <div class="category-header">
+                <h2>Traditional Greek Platters</h2>
+                <p>Authentic Masterpieces</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Moussaka</h3>
+                        <span class="item-price">$20.95</span>
+                    </div>
+                    <p class="item-description">Layers of eggplant, spiced meat, and creamy béchamel baked to golden perfection</p>
+                    <span class="featured-tag">Traditional</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Pastichio</h3>
+                        <span class="item-price">$20.95</span>
+                    </div>
+                    <p class="item-description">Greek-style baked pasta with seasoned meat and béchamel sauce</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Spanakopita</h3>
+                        <span class="item-price">$20.95</span>
+                    </div>
+                    <p class="item-description">Flaky phyllo layers filled with spinach, feta, and herbs</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Greek Lemon Chicken Pasta</h3>
+                        <span class="item-price">$24.95</span>
+                    </div>
+                    <p class="item-description">Tender chicken in creamy lemon sauce over pasta with Mediterranean herbs</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Shrimp Santorini</h3>
+                        <span class="item-price">$25.95</span>
+                    </div>
+                    <p class="item-description">Jumbo shrimp in tomato-feta sauce with herbs, served over rice</p>
+                    <span class="featured-tag">Chef's Special</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Pan Fried Tilapia</h3>
+                        <span class="item-price">$24.95</span>
+                    </div>
+                    <p class="item-description">Fresh tilapia with lemon butter sauce, rice, and grilled vegetables</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Souvlaki Platter</h3>
+                        <span class="item-price">$21.95</span>
+                    </div>
+                    <p class="item-description">Marinated chicken skewers with rice, Greek salad, and pita</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- House Specials -->
+        <div class="menu-category" data-category="specials">
+            <div class="category-header">
+                <h2>House Specials</h2>
+                <p>OPA Originals</p>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Athena Chicken</h3>
+                        <span class="item-price">$20.95</span>
+                    </div>
+                    <p class="item-description">Marinated grilled chicken over seasoned rice with Greek salad, pita, and your choice of sauce</p>
+                    <span class="featured-tag">Most Popular</span>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Athena Sliced Flank Steak</h3>
+                        <span class="item-price">$24.00</span>
+                    </div>
+                    <p class="item-description">Tender sliced steak with Mediterranean herbs, served with rice and vegetables</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Gyro Meat Bowl</h3>
+                        <span class="item-price">$21.95</span>
+                    </div>
+                    <p class="item-description">Generous portions of gyro meat over rice with Greek salad and tzatziki</p>
+                </div>
+                
+                <div class="menu-item">
+                    <div class="item-header">
+                        <h3 class="item-name">Grilled Chicken Over Vegetables</h3>
+                        <span class="item-price">$21.95</span>
+                    </div>
+                    <p class="item-description">Herb-marinated chicken breast over a medley of grilled seasonal vegetables</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location-section" id="location">
+        <div class="location-container">
+            <div class="location-header">
+                <h2>Visit Us</h2>
+                <p>Find Your Way to Authentic Greek Cuisine</p>
+            </div>
+            
+            <div class="location-content">
+                <div class="location-info">
+                    <div class="info-block">
+                        <h3>Address</h3>
+                        <p>29 3rd Street<br>New City, NY 10956</p>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h3>Hours of Operation</h3>
+                        <table class="hours-table">
+                            <tr>
+                                <td>Monday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Tuesday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Wednesday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Thursday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Friday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>8:00 AM – 7:30 PM</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>Closed</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h3>Contact</h3>
+                        <p>Phone: (845) 634-2029</p>
+                        <p>We're located in the heart of New City, easily accessible and waiting to serve you.</p>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3004.6344179155863!2d-73.993176323691!3d41.142506033445876!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2c2f99a8685bf%3A0xb1b94053723faf2d!2sOpa%20Breakfast%20%26%20Sandwich%20Shop!5e0!3m2!1sen!2sus!4v1762788118104!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="menu-cta" id="contact">
+        <div class="menu-cta-content">
+            <h2>Ready to Experience OPA?</h2>
+            <p>Call ahead for takeout or dine with us to experience the full warmth of Greek hospitality.</p>
+            <div class="cta-buttons">
+                <a href="tel:8456342029" class="btn btn-secondary">Call to Order</a>
+                <a href="index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>OPA</h4>
+                <p>29 3rd Street<br>New City, NY 10956</p>
+                <p style="margin-top: 1rem;">(845) 634-2029</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Hours</h4>
+                <p>Monday – Saturday<br>8:00 AM – 7:30 PM</p>
+                <p style="margin-top: 1rem;">Sunday: Closed</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="story.html">Our Story</a></li>
+                    <li><a href="#location">Location</a></li>
+                    <li><a href="tel:8456342029">Reservations</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>Follow our journey</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 OPA Restaurant. Crafted with passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Category filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const categories = document.querySelectorAll('.menu-category');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+                
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter categories
+                categories.forEach(cat => {
+                    if (category === 'all') {
+                        cat.style.display = 'block';
+                    } else {
+                        if (cat.getAttribute('data-category') === category) {
+                            cat.style.display = 'block';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        // Add stagger animation to menu items
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.05}s`;
+        });
+    </script>
+</body>
+</html>
