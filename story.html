@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - OPA Restaurant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2C5F9D;
+            --secondary: #C8A882;
+            --accent: #E07A5F;
+            --dark: #1a1a2e;
+            --light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background: #0f0c29;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light);
+            letter-spacing: 4px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: var(--light);
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-links a:hover {
+            color: var(--secondary);
+            text-shadow: 0 0 20px rgba(200, 168, 130, 0.6);
+        }
+        
+        .nav-cta-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 50px;
+            color: var(--light);
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+        
+        .nav-cta-btn:hover {
+            background: rgba(200, 168, 130, 0.3);
+            border-color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .story-hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+        
+        .story-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(44, 95, 157, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+        }
+        
+        .story-hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: var(--light);
+            max-width: 900px;
+            padding: 2rem;
+        }
+        
+        .story-hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 6rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .story-hero p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Story Content Sections */
+        .story-section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 8rem;
+        }
+        
+        .story-grid.reverse {
+            direction: rtl;
+        }
+        
+        .story-grid.reverse > * {
+            direction: ltr;
+        }
+        
+        .story-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+        
+        .story-text p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .story-visual {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            min-height: 400px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .story-visual:hover::before {
+            left: 100%;
+        }
+        
+        .story-visual:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 8rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .timeline-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .timeline-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .timeline-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-title p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 4rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent, var(--secondary), transparent);
+        }
+        
+        .timeline-item {
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -4.6rem;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(200, 168, 130, 0.8);
+        }
+        
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.4s ease;
+        }
+        
+        .timeline-content:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateX(10px);
+        }
+        
+        .timeline-year {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-content p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        
+        /* Values Section */
+        .values-section {
+            padding: 8rem 2rem;
+        }
+        
+        .values-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .values-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .values-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        .value-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 3rem;
+            text-align: center;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s;
+        }
+        
+        .value-card:hover::before {
+            left: 100%;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-15px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+        
+        .value-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+        }
+        
+        .value-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .value-card p {
+            font-size: 1.05rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+        
+        /* Team Section */
+        .team-section {
+            padding: 8rem 2rem;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .team-title h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 1rem;
+        }
+        
+        .team-title p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.9;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .team-quote {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 4rem 3rem;
+            margin: 4rem auto;
+            max-width: 900px;
+        }
+        
+        .team-quote p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .team-quote-author {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        /* CTA Section */
+        .story-cta {
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+        
+        .story-cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(30px);
+            padding: 5rem 4rem;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .story-cta h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--light);
+            margin-bottom: 2rem;
+        }
+        
+        .story-cta p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1.2rem 3rem;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--light);
+        }
+        
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border: 2px solid transparent;
+            color: var(--light);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 60px rgba(200, 168, 130, 0.6);
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+            padding: 4rem 2rem 2rem;
+            color: var(--light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-5px) rotate(360deg);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .story-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-content { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .story-hero h1 { font-size: 3.5rem; }
+            .story-text h2 { font-size: 2.5rem; }
+            .values-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">OPA</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="story.html">Our Story</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="index.html#location">Location</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="tel:8456342029" class="nav-cta-btn">Reserve Now</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="story-hero">
+        <div class="story-hero-bg"></div>
+        <div class="story-hero-content">
+            <h1>Our Story</h1>
+            <p>A legacy of Greek tradition, family recipes, and the timeless art of hospitality—passed down through generations and shared with love.</p>
+        </div>
+    </section>
+
+    <!-- Story Section 1 -->
+    <section class="story-section">
+        <div class="story-container">
+            <div class="story-grid">
+                <div class="story-text">
+                    <h2>Where It All Began</h2>
+                    <p>OPA's story begins in a small village in Greece, where food wasn't just sustenance—it was the heart of every celebration, the soul of every gathering, and the thread that wove families together.</p>
+                    <p>Our founder's grandmother would spend hours in her kitchen, crafting dishes that told stories of ancient traditions and Mediterranean sunshine. These weren't just recipes; they were love letters written in olive oil, herbs, and time-honored techniques.</p>
+                </div>
+                <div class="story-visual">🏛️</div>
+            </div>
+            
+            <div class="story-grid reverse">
+                <div class="story-text">
+                    <h2>A Dream Takes Flight</h2>
+                    <p>When our family arrived in New City, we brought more than suitcases—we carried generations of culinary wisdom, sacred family recipes scribbled on weathered paper, and an unshakeable belief that food has the power to transport, transform, and unite.</p>
+                    <p>We dreamed of creating a place where the warmth of Greek hospitality met the energy of American dining. Where every guest would feel like family, and every meal would be a journey to the Mediterranean.</p>
+                </div>
+                <div class="story-visual">✨</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="timeline-container">
+            <div class="timeline-title">
+                <h2>Our Journey</h2>
+                <p>Milestones of Excellence</p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2015</div>
+                        <h3>The Beginning</h3>
+                        <p>OPA opened its doors in New City with a simple mission: bring authentic Greek cuisine to our community with uncompromising quality and genuine hospitality.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2017</div>
+                        <h3>Community Recognition</h3>
+                        <p>Named "Best Greek Restaurant" by local food critics and embraced by the community as a beloved gathering place for families and friends.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2020</div>
+                        <h3>Expanding Our Vision</h3>
+                        <p>Introduced enhanced takeout services and expanded our menu while maintaining the authentic flavors that made us a local favorite.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025</div>
+                        <h3>A New Chapter</h3>
+                        <p>Celebrating a decade of serving our community with the same passion, authenticity, and dedication that inspired our opening day.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="values-container">
+            <div class="values-title">
+                <h2>What We Stand For</h2>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🌿</div>
+                    <h3>Authenticity</h3>
+                    <p>Every recipe honors its Greek heritage. We never compromise on traditional methods or authentic ingredients.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">❤️</div>
+                    <h3>Family</h3>
+                    <p>From our family to yours. We treat every guest with the warmth and care we'd show our own relatives.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">✨</div>
+                    <h3>Excellence</h3>
+                    <p>Quality isn't negotiable. From ingredient selection to presentation, we pursue perfection in every detail.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🌍</div>
+                    <h3>Community</h3>
+                    <p>We're proud to be part of New City. Supporting local suppliers and giving back to our community matters to us.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🍷</div>
+                    <h3>Tradition</h3>
+                    <p>Ancient techniques meet modern standards. We honor the past while embracing innovation.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">🎉</div>
+                    <h3>Celebration</h3>
+                    <p>Life's too short not to celebrate. Every meal at OPA is an occasion worth savoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="team-container">
+            <div class="team-title">
+                <h2>The Heart Behind OPA</h2>
+                <p>Our kitchen is led by passionate culinary artists who bring decades of combined experience, trained in both traditional Greek kitchens and modern culinary techniques. Every dish reflects their dedication to the craft and their love for Greek cuisine.</p>
+            </div>
+            
+            <div class="team-quote">
+                <p>"Cooking is an act of love. When you put your heart into preparing food for others, they taste more than ingredients—they taste care, tradition, and passion."</p>
+                <div class="team-quote-author">— The OPA Kitchen</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="story-cta">
+        <div class="story-cta-content">
+            <h2>Become Part of Our Story</h2>
+            <p>Every great meal creates a memory. Join us and become part of the OPA family—where every visit writes a new chapter in our shared story.</p>
+            <div class="cta-buttons">
+                <a href="menu.html" class="btn btn-primary">Explore Our Menu</a>
+                <a href="tel:8456342029" class="btn btn-secondary">Reserve Your Table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>OPA</h4>
+                <p>29 3rd Street<br>New City, NY 10956</p>
+                <p style="margin-top: 1rem;">(845) 634-2029</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Hours</h4>
+                <p>Monday – Saturday<br>8:00 AM – 7:30 PM</p>
+                <p style="margin-top: 1rem;">Sunday: Closed</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Navigate</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="index.html#location">Location</a></li>
+                    <li><a href="tel:8456342029">Reservations</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Connect</h4>
+                <p>Follow our journey</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="Twitter">🐦</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 OPA Restaurant. Crafted with passion.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
